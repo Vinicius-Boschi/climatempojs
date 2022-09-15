@@ -1,94 +1,38 @@
 <template>
   <main>
-    <div class='container'>
-        <div class="nextClimates">
-            <h3 class="title">Sun, 7 Jun</h3>
-            <img class='imgClimate' src="https://user-images.githubusercontent.com/74377158/189968716-b67438fd-999a-4152-ac0d-cdc0051aceee.png" alt="rain">
-            <span class='temperature'>
-                <p class='maxTemp'>16°C</p>
-                <p class='minTemp'>11°C</p>
-            </span>
-        </div>
-
-        <div class="nextClimates">
-            <h3 class="title">Sun, 7 Jun</h3>
-            <img class='imgClimate' src="https://user-images.githubusercontent.com/74377158/189968716-b67438fd-999a-4152-ac0d-cdc0051aceee.png" alt="rain">
-            <span class='temperature'>
-                <p class='maxTemp'>16°C</p>
-                <p class='minTemp'>11°C</p>
-            </span>
-        </div>
-
-        <div class="nextClimates">
-            <h3 class="title">Sun, 7 Jun</h3>
-            <img class='imgClimate' src="https://user-images.githubusercontent.com/74377158/189968716-b67438fd-999a-4152-ac0d-cdc0051aceee.png" alt="rain">
-            <span class='temperature'>
-                <p class='maxTemp'>16°C</p>
-                <p class='minTemp'>11°C</p>
-            </span>
-        </div>
-
-        <div class="nextClimates">
-            <h3 class="title">Sun, 7 Jun</h3>
-            <img class='imgClimate' src="https://user-images.githubusercontent.com/74377158/189968716-b67438fd-999a-4152-ac0d-cdc0051aceee.png" alt="rain">
-            <span class='temperature'>
-                <p class='maxTemp'>16°C</p>
-                <p class='minTemp'>11°C</p>
-            </span>
-        </div>
-
-        <div class="nextClimates">
-            <h3 class="title">Sun, 7 Jun</h3>
-            <img class='imgClimate' src="https://user-images.githubusercontent.com/74377158/189968716-b67438fd-999a-4152-ac0d-cdc0051aceee.png" alt="rain">
-            <span class='temperature'>
-                <p class='maxTemp'>16°C</p>
-                <p class='minTemp'>11°C</p>
-            </span>
-        </div>
-    </div>
+    <div class='container'></div>
 
     <div class="content">
-      <h2>Today's Hightlights</h2>
-      <div class="infos">
-        <div class="content-infos">
-          <h3 class="title">Wind status</h3>
-          <h1 class="titleContent">7 mph</h1>
-        </div>
-
-        <div class="content-infos">
-          <h3 class="title">Humidity</h3>
-          <h1 class="titleContent">84%</h1>
-        </div>
-
-        <div class="content-infos">
-          <h3 class="title">Visibility</h3>
-          <h1 class="titleContent">6,4 miles</h1>
-        </div>
-
-        <div class="content-infos">
-          <h3 class="title">Air Pressure</h3>
-          <h1 class="titleContent">998 mb</h1>
-        </div>
-      </div>
+      <h2>Informações de hoje</h2>
+      <div class="infos"></div>
     </div>
-    <footer>
+    <footer class="footer">
         <p>Created by</p>
         <span>
-          <a href="https://portfolioviniciusboschi.herokuapp.com/">Vinícius Boschi</a>
+          <a href="https://portfolioviniciusboschi.herokuapp.com/" target="_blank">Vinícius Boschi</a>
         </span>
         <p>devChallenges.io</p>
     </footer>
+
   </main>
 
 </template>
 
 <script>
+
+  import main from '../js/Main.js'
+  import contentInfo from '../js/contentInfo.js'
+
   export default {
-    name: 'MainContent'
+    name: 'MainContent',
+    components: [
+      main,
+      contentInfo
+    ]
   }
 </script>
 
-<style scoped>
+<style>
 
   main {
     background-color: #100E1D;
@@ -99,6 +43,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     margin: 3rem;
+    gap: 1rem;
   }
 
   .nextClimates {
@@ -165,7 +110,7 @@
     font-weight: 500;
   }
 
-  footer {
+  .footer {
     display: flex;
     justify-content: center;
     color: #E7E8EB;
@@ -179,6 +124,32 @@
     cursor: pointer;
     margin-right: .5rem;
     margin-left: .5rem;
+  }
+
+  @media (min-width: 375px) and (max-width: 700px ) {
+    .menu {
+      width: 100%;
+    }
+  
+    .container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .infos {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  
+    .footer {
+      padding: 1rem;
+      height: 42px;
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 701px) and (max-width: 1200px) {
+    .menu {
+      width: 100%;
+    }
   }
   
 </style>

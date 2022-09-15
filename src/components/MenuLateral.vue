@@ -3,30 +3,50 @@
     <div class='inputDiv'>
       <input class='search' type="search" name="search" id="search" placeholder="Procure por cidade ou estado">
     </div>
-    <div class="menuContent">
-      <img class='climate' src="https://user-images.githubusercontent.com/74377158/189968716-b67438fd-999a-4152-ac0d-cdc0051aceee.png" alt="rain">
-      <h1 class='temp'>15<span>°C</span></h1>
-      <h3 class='description'>Shower</h3>
-      <div class="dateTime">
-        <p class='time'>Today • Fri, 5 Jun</p>
-          <span class='location'>
-            <img class='imgMap' src="https://user-images.githubusercontent.com/74377158/189970549-2aacec60-78c9-4044-bc33-8a740ad2b653.png" alt="">
-            <p>Helsinki</p>
-          </span>
-      </div>
-    </div>
+    <div class="menuContent"></div>
   </div>
 </template>
 
 <script>
   
+  import fillTable from '../js/MenuLateral.js'
+  import swapiGet from '../js/MenuLateral.js'
+
   export default {
-    name: 'LateralMenu'
+    name: 'LateralMenu',
+    components: {
+      fillTable,
+      swapiGet
+    },
+    methods: {
+      search() {
+        let inputButton = document.querySelector("#search")
+        inputButton.addEventListener('keyup', async function(e) {
+          if (e.keyCode == 13) {
+            await this.searchCity()
+            return
+          }
+        })
+      },
+      async searchCity() {
+        let inputButton = document.querySelector("#search")
+        let inputValue = inputButton.value
+        if (inputValue != '') {
+          let citys = await swapiGet(inputValue)
+          citys.forEach(city => fillTable(city))
+          console.log(citys)
+        }
+      }
+    },
+    mounted() {
+      this.search(),
+      this.searchCity()
+    }
   }
 
 </script>
 
-<style scoped>
+<style>
   .menu {
     width: 450px;
     background-color: #1E213A;

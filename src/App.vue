@@ -10,13 +10,11 @@
 <script>
   import LateralMenu from './components/MenuLateral.vue'
   import MainContent from './components/Main.vue'
-  import Footer from './components/Footer.vue'
 
     export default {
         components: {
             LateralMenu,
-            MainContent,
-            Footer
+            MainContent
         }
     }
 
@@ -34,6 +32,18 @@
 
     #app {
         font-family: 'Raleway', serif;
+    }
+
+    @media (min-width: 375px) and (max-width: 700px ) {
+        .contentApp {
+            flex-direction: column;
+        }
+    }
+
+    @media (min-width: 701px) and (max-width: 1200px) {
+        .contentApp {
+            flex-direction: column;
+        }
     }
     
 </style>
