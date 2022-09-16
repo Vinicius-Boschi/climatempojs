@@ -28,7 +28,7 @@
     
         $('.menuContent').append(
         `
-            <img class='climate' src="src/public/img/${tableData.condition_slug}.png">
+            <img class='climate' src="src/img/${tableData.condition_slug}.png" alt='${tableData.condition_slug}'>
             <h1 class='temp'>${tableData.temp}<span>°C</span></h1>
             <h3 class='description'>${tableData.description}</h3>
             <div class="dateTime">

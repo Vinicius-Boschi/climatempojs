@@ -36,7 +36,7 @@
                 `
                     <div class='nextClimates'>
                         <h3 class="title">${item.weekday}, ${item.date}</h3>
-                        <img class='imgClimate' src="src/public/img/${item.condition}.png">
+                        <img class='imgClimate' src="src/img/${item.condition}.png" alt='${item.condition}'>
                         <span class='temperature'>
                             <p class='maxTemp'>${item.max}°C</p>
                             <p class='minTemp'>${item.min}°C</p>
@@ -228,6 +228,10 @@
   @media (min-width: 701px) and (max-width: 1200px) {
     .menu {
       width: 100%;
+    } 
+
+    .container {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
   
