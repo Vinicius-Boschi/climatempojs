@@ -13,22 +13,79 @@
         </span>
         <p>devChallenges.io</p>
     </footer>
-
   </main>
-
 </template>
 
 <script>
-
-  import main from '../js/Main.js'
-  import contentInfo from '../js/contentInfo.js'
-
+  
   export default {
     name: 'MainContent',
-    components: [
-      main,
-      contentInfo
-    ]
+    methods: {
+      swapiGet() {
+        let key = 'ec767c56'
+        return axios.get(`https://api.hgbrasil.com/weather?format=json-cors&key=${key}`)
+      },
+      async mainTable() {
+        let response = await this.swapiGet("results/")
+        let conversion = JSON.stringify(response.data.results)
+        let tableData = JSON.parse(conversion)
+        let tableCast = tableData.forecast
+
+        tableCast.map(function(item) {
+            $('.container').append(
+                `
+                    <div class='nextClimates'>
+                        <h3 class="title">${item.weekday}, ${item.date}</h3>
+                        <img class='imgClimate' src="src/public/img/${item.condition}.png">
+                        <span class='temperature'>
+                            <p class='maxTemp'>${item.max}°C</p>
+                            <p class='minTemp'>${item.min}°C</p>
+                        </span>
+                    </div>
+                `
+            )
+        })
+      },
+      async contentInfo() {
+        let response = await this.swapiGet("results/")
+        let conversion = JSON.stringify(response.data.results)
+        let tableData = JSON.parse(conversion)
+    
+        $('.infos').append(
+            `
+                <div class="content-infos">
+                    <h3 class="title">Velocidade do vento</h3>
+                    <h1 class="titleContent">${tableData.wind_speedy}</h1>
+                </div>
+                <div class="content-infos">
+                    <h3 class="title">Humidade do ar</h3>
+                    <h1 class="titleContent">${tableData.humidity}%</h1>
+                    <div class='percentagem'>
+                        <p>0</p>
+                        <p>50</p>
+                        <p>100</p>
+                    </div>
+                    <div class='progress'>
+                        <div class='progress-bar' style='width:${tableData.humidity}%'></div>
+                    </div>
+                </div>
+                <div class="content-infos">
+                    <h3 class="title">Nascer do sol</h3>
+                    <h1 class="titleContent">${tableData.sunrise}</h1>
+                </div>
+                <div class="content-infos">
+                    <h3 class="title">Pôr do sol</h3>
+                    <h1 class="titleContent">${tableData.sunset}</h1>
+                </div>
+            `
+        )
+      }
+    },
+    mounted() {
+      this.swapiGet(),
+      this.mainTable(),
+      this.contentInfo()
+    }
   }
 </script>
 
@@ -99,15 +156,37 @@
     height: 200px;
     display: flex;
     flex-direction: column;
-    line-height: 0;
-    align-items: center;
-    justify-content: space-evenly;
+    line-height: 1.5;
+    text-align: center;
+    justify-content: center;
   }
 
   .titleContent {
     color: #E7E8EB;
     font-size: 54px;
     font-weight: 500;
+  }
+
+  .percentagem {
+    display: flex;
+    justify-content: space-evenly;
+    color: #A09FB1;
+  }
+
+  .progress {
+    background-color: #CCC;
+    position: relative;
+    width: 229px;
+    height: 8px;
+    border-radius: 80px;
+    align-self: center;
+  }
+
+  .progress .progress-bar{
+    position: absolute;
+    height: 100%;
+    background-color: #FFEC65;
+    border-radius: 80px;
   }
 
   .footer {

@@ -3,8 +3,6 @@
         <LateralMenu />
         <MainContent />
     </div>
-
-    <Footer />
 </template>
 
 <script>
@@ -17,7 +15,6 @@
             MainContent
         }
     }
-
 </script>
 
 <style>
